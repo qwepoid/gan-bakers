@@ -8,14 +8,13 @@ import Image from "next/image";
 const AppHeader = () => {
   const { items } = useContext(CartContext);
   const router = useRouter();
-  console.log(":items; ", items);
 
   return (
-    <div className="grid grid-cols-11 border text-center bg-yellow-200 px-4">
-      <div className="col-start-6 min-h-[60px] flex items-center font-extrabold text-2xl w-fit col-span-2">
+    <div className="grid grid-cols-11 text-center bg-gradient-to-b from-yellow-200 px-4">
+      <div className="sm:col-start-4 md:col-start-6 min-h-[60px] flex items-center font-extrabold text-3xl w-fit sm:col-span-6 md:col-span-3">
         <Link href="/">GAN Bakers</Link>
       </div>
-      <div className="col-start-10 flex items-center sm:mr-8">
+      <div className="col-start-11 flex items-center">
         <button onClick={() => router.push("/cart")} className="relative">
           <Image src={CartImage} height={32} width={32} />
           {!!items.length && (

@@ -3,6 +3,7 @@ import CartContext from "../../../context/cart-context/CartContext";
 import { CartItem } from "../../../context/cart-context/types";
 import Stepper from "./Stepper";
 import { Product } from "./types";
+import Image from "next/image";
 
 const ProductCard = ({
   id = -1,
@@ -53,12 +54,14 @@ const ProductCard = ({
     );
 
   return (
-    <div className="w-32 h-60 md:w-60 md:h-80 relative flex flex-col items-center border rounded-2xl">
-      <div className="w-full aspect-square hover:scale-105 ">
-        <img src={image} height={240} width={240} className="rounded-2xl" />
+    <div className="sm:w-36 sm:h-60 md:w-44 md:h-72 lg:w-52 lg:h-72 relative flex flex-col items-center border rounded-2xl hover:scale-105">
+      <div className="w-full aspect-square">
+        <Image src={image} height={240} width={240} className="rounded-t-2xl" />
       </div>
-      <div>{title}</div>
-      <div>{price}</div>
+      <div className="text-center text-yellow-800 font-medium font-serif">
+        {title}
+      </div>
+      <div>{`₹ ${price}`}</div>
       {addToCartPlaceholder}
     </div>
   );

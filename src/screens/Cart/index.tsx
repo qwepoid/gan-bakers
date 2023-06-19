@@ -14,15 +14,15 @@ const Cart = () => {
         <span className="text-xl font-bold ">Your Cart</span>
       </div>
       {!!items.length ? (
-        <div className="grid grid-cols-12 relative">
-          <div className="col-span-8">
+        <div className="sm:flex sm:flex-col sm:gap-4 md:grid md:grid-cols-12 relative">
+          <div className="sm:flex sm:flex-col sm:gap-4 md:col-span-8 overflow-scroll sm:h-[430px] md:h-full">
             {items.map((el) => (
-              <div className="mr-12 my-4 overflow-scroll">
+              <div className="md:mr-12 md:my-4" key={el.itemId}>
                 <CartItem item={el} />
               </div>
             ))}
           </div>
-          <div className="border border-black rounded-lg col-span-4 sticky top-40 h-max">
+          <div className="border border-black rounded-lg col-span-4 sticky sm:bottom-4 md:top-40 h-max bg-white">
             <PriceDetails />
           </div>
         </div>

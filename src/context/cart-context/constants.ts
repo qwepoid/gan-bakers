@@ -2,6 +2,7 @@ import { Product } from "../../screens/Home/components/types";
 
 export const defaultState = {
   items: [],
+  initialiseItems: () => {},
   addItem: (item: Product) => {},
-  removeItem: () => {}
+  removeItem: (id: number) => {}
 }

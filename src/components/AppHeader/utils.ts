@@ -5,7 +5,6 @@ export function calculateTotalItems(items) {
       acc += cur.itemQty;
       return acc;
     }, 0);
-    console.log("tital: ", total);
     return total;
   }
 
@@ -18,6 +17,5 @@ export function calculateTotalItems(items) {
       acc += (qty * price);
       return acc;
     }, 0);
-    console.log("tital: ", total);
     return total;
   }

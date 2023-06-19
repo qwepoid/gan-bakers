@@ -9,13 +9,18 @@ function removeItem(currentList, removalId) {
         return acc;
     }, {})
     let nonInterestedItems = currentList.filter((item: CartItem) => item.itemId !== removalId)
-    if (interestedItem.itemQty <= 1 ) return nonInterestedItems;
-    return currentList.map((item) => {
+    if (interestedItem.itemQty <= 1 ) {
+        localStorage.setItem('cart', JSON.stringify(nonInterestedItems))
+        return nonInterestedItems
+    }
+    const finalValue = currentList.map((item) => {
         if (item.itemId === removalId) {
             item.itemQty-=1;
         }
         return item;
     })
+    localStorage.setItem('cart', JSON.stringify(finalValue))
+    return finalValue
 }
 
 function addItem(currentList: CartItem[], newItem: Product): CartItem[] {
@@ -26,18 +31,22 @@ function addItem(currentList: CartItem[], newItem: Product): CartItem[] {
         return acc;
     }, {} as CartItem)
     if (Object.keys(interestedItem).length) {
-        return currentList.map((item) => {
+        const finalValue = currentList.map((item) => {
             if (item.itemId === newItem.itemId) {
                 item.itemQty+=1;
             }
             return item;
         })
+        localStorage.setItem('cart', JSON.stringify(finalValue))
+        return finalValue; 
         
     }
-    return [...currentList, {
+    const finalValue = [...currentList, {
         ...newItem,
         itemQty: 1
     }]
+    localStorage.setItem('cart', JSON.stringify(finalValue))
+    return finalValue; 
 }
 
 const reducer = (state, action) => {
@@ -48,6 +57,9 @@ const reducer = (state, action) => {
             return newState;
         case 'remove':
             newState = {...newState, items: removeItem(state.items, action.payload)};
+            return newState;
+        case 'initialise':
+            newState = {...newState, items: action.payload};
             return newState;
         default:
             return newState;

@@ -9,6 +9,17 @@ const PriceDetails = () => {
   const { items } = useContext(CartContext);
   const grossPrice = calculateTotalPrice(items).toFixed(2);
   const netPrice = (Number(grossPrice) * 0.9).toFixed(2);
+  const totalSaving = Number(grossPrice) - Number(netPrice);
+
+  function handleCheckout() {
+    const itemIds = items.map((item) => item.itemId);
+    const payload = {
+      itemIds,
+      totalPrice: grossPrice,
+      netPayable: netPrice,
+    };
+    console.log("Payload: ", payload);
+  }
   return (
     <div className="p-4">
       <div className="text-center font-medium">Price Summary</div>
@@ -29,14 +40,15 @@ const PriceDetails = () => {
           <span className="font-medium">Net Amount</span>
           <span className="font-bold">{netPrice}</span>
         </div>
-        <button className="border my-4 p-2 rounded-lg bg-green-500 text-white font-medium">
+        <button
+          className="border my-4 p-2 rounded-lg bg-green-500 text-white font-medium"
+          onClick={handleCheckout}
+        >
           Checkout
         </button>
         <div className="flex justify-between">
           <span className="text-green-600 font-medium">Total Savings</span>
-          <span className="font-bold text-green-600">
-            Rs. {grossPrice - netPrice}
-          </span>
+          <span className="font-bold text-green-600">Rs. {totalSaving}</span>
         </div>
       </div>
     </div>

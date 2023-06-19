@@ -4,10 +4,11 @@ import { Product } from "./types";
 
 const ProductsList = ({ productsList }: { productsList: Product[] }) => {
   return (
-    <div className="flex gap-12 flex-wrap my-12 justify-between">
+    <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12 my-12">
       {productsList.map(
         ({ itemName, itemPrice, itemId, itemDesc, itemImage }) => (
           <ProductCard
+            key={itemId}
             id={itemId}
             title={itemName}
             price={itemPrice}
